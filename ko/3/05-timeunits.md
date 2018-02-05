@@ -1,6 +1,6 @@
 ---
-title: Time Units
-actions: ['checkAnswer', 'hints']
+title: 시간 단위
+actions: ['정답 확인하기', '힌트 보기']
 requireLogin: true
 material:
   editor:
@@ -17,7 +17,7 @@ material:
 
             uint dnaDigits = 16;
             uint dnaModulus = 10 ** dnaDigits;
-            // 1. Define `cooldownTime` here
+            // 1. `cooldownTime`을 여기에 정의하게
 
             struct Zombie {
                 string name;
@@ -32,7 +32,7 @@ material:
             mapping (address => uint) ownerZombieCount;
 
             function _createZombie(string _name, uint _dna) internal {
-                // 2. Update the following line:
+                // 2. 아래 줄을 업데이트하게:
                 uint id = zombies.push(Zombie(_name, _dna)) - 1;
                 zombieToOwner[id] = msg.sender;
                 ownerZombieCount[msg.sender]++;
@@ -183,54 +183,53 @@ material:
       }
 ---
 
-The `level` property is pretty self-explanatory. Later on, when we create a battle system, zombies who win more battles will level up over time and get access to more abilities.
+`level` 속성은 뭔지 말 안 해도 알겠지? 나중에 우리가 전투 시스템을 만들게 되면, 전투에서 더 많이 이긴 좀비는 시간이 지나며 레벨업을 하게 될 것이고 더 많은 기능이 생길 것이네.
 
-The `readyTime` property requires a bit more explanation. The goal is to add a "cooldown period", an amount of time a zombie has to wait after feeding or attacking before it's allowed to feed / attack again. Without this, the zombie could attack and multiply 1,000 times per day, which would make the game way too easy.
+`readyTime` 속성은 조금 설명이 필요할 듯하군. 이것의 목표는 좀비가 먹이를 먹거나 공격을 하고 나서 다시 먹거나 공격할 수 있을 때까지 기다려야 하는 "재사용 대기 시간"을 추가하는 것이네. 이 속성 없이는, 좀비는 하루에 천 번 이상 공격하거나 증식할 수 있지. 이러면 게임이 너무 쉬워져 버릴 것이네.
 
+좀비가 다시 공격할 때까지 기다려야 하는 시간을 측정하기 위해, 우리는 솔리디티의 시간 단위(Time units)를 사용할 것이네.
 In order to keep track of how much time a zombie has to wait until it can attack again, we can use Solidity's time units.
 
-## Time units
+## 시간 단위(Time units)
 
-Solidity provides some native units for dealing with time. 
+솔리디티는 시간을 다룰 수 있는 단위계를 기본적으로 제공하네.
 
-The variable `now` will return the current unix timestamp (the number of seconds that have passed since January 1st 1970). The unix time as I write this is `1515527488`.
+`now` 변수를 쓰면 현재의 유닉스 타임스탬프(1970년 1월 1일부터 지금까지의 초 단위 합) 값을 얻을 수 있네. 내가 이 글을 쓸 때 유닉스 타임의 값은 `1515527488`이군.
 
->Note: Unix time is traditionally stored in a 32-bit number. This will lead to the "Year 2038" problem, when 32-bit unix timestamps will overflow and break a lot of legacy systems. So if we wanted our DApp to keep running 20 years from now, we could use a 64-bit number instead — but our users would have to spend more gas to use our DApp in the meantime. Design decisions!
+>참고: 유닉스 타임은 전통적으로 32비트 숫자로 저장되네. 이는 유닉스 타임스탬프 값이 32비트로 표시가 되지 않을 만큼 커졌을 때 많은 구형 시스템에 문제가 발생할 "Year 2038" 문제를 일으킬 것이네. 그러니 만약 우리 DApp이 지금부터 20년 이상 운영되길 원한다면, 우리는 64비트 숫자를 써야 할 것이네. 하지만 우리 유저들은 그동안 더 많은 가스를 소모해야 하겠지. 설계를 보고 결정을 해야 하네!
 
-Solidity also contains the time units `seconds`, `minutes`, `hours`, `days`, `weeks` and `years`. These will convert to a `uint` of the number of seconds in that length of time. So `1 minutes` is `60`, `1 hours` is `3600` (60 seconds x 60 minutes), `1 days` is `86400` (24 hours x 60 minutes x 60 seconds), etc.
+솔리디티는 또한 `seconds`, `minutes`, `hours`, `days`, `weeks`, `years` 같은 시간 단위 또한 포함하고 있다네. 이들은 그에 해당하는 길이 만큼의 초 단위 `uint` 숫자로 변환되네. 즉 `1 minutes`는 `60`, `1 hours`는 `3600`(60초 x 60 분), `1 days`는 `86400`(24시간 x 60분 x 60초) 같이 변환되네.
 
-Here's an example of how these time units can be useful:
+이 시간 단위들이 유용하게 사용될 수 있는 예시는 다음과 같네:
 
 ```
 uint lastUpdated;
 
-// Set `lastUpdated` to `now`
+// `lastUpdated`를 `now`로 설정
 function updateTimestamp() public {
   lastUpdated = now;
 }
 
-// Will return `true` if 5 minutes have passed since `updateTimestamp` was 
-// called, `false` if 5 minutes have not passed
+// 마지막으로 `updateTimestamp`가 호출된 뒤 5분이 지났으면 `true`를, 5분이 아직 지나지 않았으면 `false`를 반환
 function fiveMinutesHavePassed() public view returns (bool) {
   return (now >= (lastUpdated + 5 minutes));
 }
 ```
 
-We can use these time units for our Zombie `cooldown` feature.
+우리는 이런 시간 단위들은 좀비의 `cooldown` 기능을 추가할 때 사용할 것이네.
 
+## 직접 해보기
 
-## Put it to the test 
+우리 DApp에 재사용 대기 시간을 추가하고, 좀비들이 공격하거나 먹이를 먹은 후 **1일**이 지나야만 다시 공격할 수 있도록 할 것이네.
 
-Let's add a cooldown time to our DApp, and make it so zombies have to wait **1 day** after attacking or feeding to attack again.
+1. `cooldownTime`이라는 `uint` 변수를 선언하고, 여기에 `1 days`를 대입하게.(문법적으로 이상하게 보여도 넘어가게. 자네가 "1 day"를 대입한다면, 컴파일이 되지 않을 것일세!)
 
-1. Declare a `uint` called `cooldownTime`, and set it equal to `1 days`. (Forgive the poor grammar — if you set it equal to "1 day", it won't compile!)
+2. 우리가 이전 챕터에서 우리의 `Zombie` 구조체에 `level`과 `readyTime`을 추가했으니, 우린 `Zombie` 구조체를 생성할 때 함수의 인수 개수가 정확히 맞도록 `_createZombie()` 함수를 업데이트해야 하네.
 
-2. Since we added a `level` and `readyTime` to our `Zombie` struct in the previous chapter, we need to update `_createZombie()` to use the correct number of arguments when we create a new `Zombie` struct.
+  코드의 `zombies.push` 줄에 2개의 인수를 더 사용하도록 업데이트하게: `1`(`level`에 사용), `uint32(now + cooldownTime)`(`readyTime`에 사용).
 
-  Update the `zombies.push` line of code to add 2 more arguments: `1` (for `level`), and `uint32(now + cooldownTime)` (for `readyTime`).
+>참고: `now`가 기본적으로 `uint256`을 반환하기 때문에, `uint32(...)` 부분이 필수적이네. 이렇게 함으로써 해당 데이터를 `uint32`로 명시적으로 변환하는 것이지.
 
->Note: The `uint32(...)` is necessary because `now` returns a `uint256` by default. So we need to explicitly convert it to a `uint32`.
+`now + cooldownTime`은 현재 유닉스 타임스탬프(초 단위)에 1일을 초 단위로 바꾼 것의 합과 같을 것이네. 바꿔 말해 지금부터 하루 뒤의 유닉스 타임스탬프 값과 같은 것이지. 이후에 우리는 좀비를 다시 사용하기 위해 충분한 시간이 지났는지 확인할 수 있도록 좀비의 `readyTime`이 `now`보다 큰지 비교할 것이네.
 
-`now + cooldownTime` will equal the current unix timestamp (in seconds) plus the number of seconds in 1 day — which will equal the unix timestamp 1 day from now. Later we can compare to see if this zombie's `readyTime` is greater than `now` to see if enough time has passed to use the zombie again.
-
-We'll implement the functionality to limit actions based on `readyTime` in the next chapter.
+다음 챕터에서는 `readyTime`에 기반하여 행동을 제한하도록 하는 기능들을 구현할 것이네.
