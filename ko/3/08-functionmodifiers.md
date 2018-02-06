@@ -1,6 +1,6 @@
 ---
-title: More on Function Modifiers
-actions: ['checkAnswer', 'hints']
+title: 함수 제어자 톺아보기
+actions: ['정답 확인하기', '힌트 보기']
 requireLogin: true
 material:
   editor:
@@ -13,7 +13,7 @@ material:
 
         contract ZombieHelper is ZombieFeeding {
 
-          // Start here
+          // 여기서 시작하게
 
         }
       "zombiefeeding.sol": |
@@ -172,41 +172,41 @@ material:
       }
 ---
 
-Great! Our zombie now has a functional cooldown timer.
+훌륭헤! 우리 좀비가 이제 재사용 대기 시간 타이머를 가지게 되었군.
 
-Next, we're going to add some additional helper methods. We've created a new file for you called `zombiehelper.sol`, which imports `zombiefeeding.sol`. This will help to keep our code organized.
+다음으로, 우리는 추가적인 헬퍼 메소드를 좀 더 추가할 것이네. 자네를 위해 `zombiehelper.sol`이라는, `zombiefeeding.sol`을 import하는 새로운 파일을 추가해뒀네. 이렇게 하면 우리의 코드가 잘 정리된 상태를 유지할 수 있을 것이네.
 
-Let's make it so zombies gain special abilities after reaching a certain level. But in order to do that, first we'll need to learn a little bit more about function modifiers.
+이제 좀비들이 특정 레벨에 도달하면 특별한 능력들을 얻을 수 있도록 만들 것이네. 하지만 그렇게 하기 위해선, 먼저 함수 제어자에 대해 조금 더 배울 필요가 있네.
 
-## Function modifiers with arguments
+## 인수를 가지는 함수 제어자
 
-Previously we looked at the simple example of `onlyOwner`. But function modifiers can also take arguments. For example:
+이전에는 `onlyOwner`라는 간단한 예시를 살펴보았네. 하지만 함수 제어자는 사실 인수 또한 받을 수 있네. 예를 들면:
 
 ```
-// A mapping to store a user's age:
+// 사용자의 나이를 저장하기 위한 매핑
 mapping (uint => uint) public age;
 
-// Modifier that requires this user to be older than a certain age:
+// 사용자가 특정 나이 이상인지 확인하는 제어자
 modifier olderThan(uint _age, uint _userId) {
   require (age[_userId] >= _age);
   _;
 }
 
-// Must be older than 16 to drive a car (in the US, at least).
-// We can call the `olderThan` modifier with arguments like so:
+// 차를 운전하기 위햐서는 16살 이상이어야 하네(적어도 미국에서는).
+// `olderThan` 제어자를 인수와 함께 호출하려면 이렇게 하면 되네:
 function driveCar(uint _userId) public olderThan(16, _userId) {
-  // Some function logic
+  // 필요한 함수 내용들
 }
 ```
 
-You can see here that the `olderThan` modifier takes arguments just like a function does. And that the `driveCar` function passes its arguments to the modifier.
+여기서 자네는 `olderthan` 제어자가 함수와 비슷하게 인수를 받는 것을 볼 수 있을 것이네. 그리고 `driveCar` 함수는 받은 인수를 제어자로 전달하고 있지.
 
-Let's try making our own `modifier` that uses the zombie `level` property to restrict access to special abilities.
+이제 특별한 능력에 제한을 걸 수 있도록 좀비의 `level` 속성을 사용하는 우리만의 `modifier`를 만들어보세.
 
-## Put it to the test
+## 직접 해보기
 
-1. In `ZombieHelper`, create a `modifier` called `aboveLevel`. It will take 2 arguments, `_level` (a `uint`) and `_zombieId` (also a `uint`).
+1. `ZombieHelper`에서, `aboveLevel`이라는 이름의 `modifier`를 만들게. 이 제어자는 `_level`(`uint`), `_zombieId`(`uint`) 두 개의 인수를 받을 것이네.
 
-2. The body should check to make sure `zombies[_zombieId].level` is greater than or equal to `_level`.
+2. 함수 내용에서는 `zombies[_zombieId].level`이 `_level` 이상인지 확실하게 확인해야 하네.
 
-3. Remember to have the last line of the modifier call the rest of the function with `_;`.
+3. 함수의 나머지 내용을 실행할 수 있도록 제어자의 마지막 줄에 `_;`를 넣는 것을 잊지 말게.
