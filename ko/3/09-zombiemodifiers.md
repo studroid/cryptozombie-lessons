@@ -1,6 +1,6 @@
 ---
-title: Zombie Modifiers
-actions: ['checkAnswer', 'hints']
+title: 좀비 제어자
+actions: ['정답 확인하기', '힌트 보기']
 requireLogin: true
 material:
   editor:
@@ -18,7 +18,7 @@ material:
             _;
           }
 
-          // Start here
+          // 여기서 시작하게
 
         }
       "zombiefeeding.sol": |
@@ -177,37 +177,37 @@ material:
       }
 ---
 
-Now let's use our `aboveLevel` modifier to create some functions.
+이제 몇몇 함수를 만들 때 우리의 `aboveLevel` 제어자를 사용해보세.
 
-Our game will have some incentives for people to level up their zombies:
+우리 게임에서는 사용자들이 그들의 좀비를 레벨업할 때 인센티브를 줄 것이네.
 
-- For zombies level 2 and higher, users will be able to change their name.
-- For zombies level 20 and higher, users will be able to give them custom DNA.
+- 레벨 2 이상인 좀비인 경우, 사용자들은 그 좀비의 이름을 바꿀 수 있네.
+- 레벨 20 이상인 좀비인 경우, 사용자들은 그 좀비에게 임의의 DNA를 줄 수 있네.
 
-We'll implement these functions below. Here's the example code from the previous lesson for reference:
+이 함수들을 아래에 구현할 것이네. 참고로 하기 위해 이전 레슨에서 본 예제 코드를 주겠네.
 
 ```
-// A mapping to store a user's age:
+// 사용자의 나이를 저장하기 위한 매핑
 mapping (uint => uint) public age;
 
-// Require that this user be older than a certain age:
+// 사용자가 특정 나이 이상인지 확인하는 제어자
 modifier olderThan(uint _age, uint _userId) {
   require (age[_userId] >= _age);
   _;
 }
 
-// Must be older than 16 to drive a car (in the US, at least)
+// 차를 운전하기 위햐서는 16살 이상이어야 하네(적어도 미국에서는).
 function driveCar(uint _userId) public olderThan(16, _userId) {
-  // Some function logic
+  // 필요한 함수 내용들
 }
 ```
 
-## Put it to the test
+## 직접 해보기
 
-1. Create a function called `changeName`. It will take 2 arguments: `_zombieId` (a `uint`), and `_newName` (a `string`), and make it `external`. It should have the `aboveLevel` modifier, and should pass in `2` for the `_level` parameter. (Don't forget to also pass the `_zombieId`).
+1. `changeName`이라는 함수를 만들게. 이 함수는 2개의 인수를 받을 것이네: `_zombieId`(`uint`), `_newName`(`string`). 그리고 함수를 `external`로 만들게. 이 함수는 `aboveLevel` 제어자를 가져야 하고, `_level`에 `2`라는 값을 전달해야 하네. `_zombieId` 또한 전달하는 것을 잊지 말게나.
 
-2. In this function, first we need to verify that `msg.sender` is equal to `zombieToOwner[_zombieId]`. Use a `require` statement.
+2. 함수의 내용에서는, 먼저 우리는 `msg.sender`가 `zombieToOwner[_zombieId]`와 같은지 검증해야 하네. `require` 문장을 사용하게.
 
-3. Then the function should set `zombies[_zombieId].name` equal to `_newName`.
+3. 그리고 나서 이 함수에서는 `zombies[_zombieId].name`에 `_newName`을 대입해야 하네.
 
-3. Create another function named `changeDna` below `changeName`. Its definition and contents will be almost identical to `changeName`, except its second argument will be `_newDna` (a `uint`), and it should pass in `20` for the `_level` parameter on `aboveLevel`. And of course, it should set the zombie's `dna` to `_newDna` instead of setting the zombie's name.
+4. `changeName` 아래에 `changeDna`라는 또다른 함수를 만들게. 이 함수의 정의와 내용은 `changeName`과 거의 똑같지만, 두 번째 인수가 `_newDna`(`uint`)이고, `aboveLevel`의 `_level` 매개 변수에 `20`을 전달해야 할 것이네. 물론, 이 함수는 좀비의 이름을 설정하는 것 대신에 좀비의 `dna`를 `_newDna`로 설정해야 하겠지.
