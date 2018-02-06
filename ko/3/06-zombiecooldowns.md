@@ -1,6 +1,6 @@
 ---
-title: Zombie Cooldowns
-actions: ['checkAnswer', 'hints']
+title: 좀비 재사용 대기 시간
+actions: ['정답 확인하기', '힌트 보기']
 requireLogin: true
 material:
   editor:
@@ -34,9 +34,9 @@ material:
             kittyContract = KittyInterface(_address);
           }
 
-          // 1. Define `_triggerCooldown` function here
+          // 1. `_triggerCooldown` 함수를 여기에 정의하게
 
-          // 2. Define `_isReady` function here
+          // 2. `_isReady` 함수를 여기에 정의하게
 
           function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) public {
             require(msg.sender == zombieToOwner[_zombieId]);
@@ -197,38 +197,38 @@ material:
       }
 ---
 
-Now that we have a `readyTime` property on our `Zombie` struct, let's jump to `zombiefeeding.sol` and implement a cooldown timer.
+이제 `Zombie` 구조체에 `readyTime` 속성을 가지고 있으니, `zombiefeeding.sol`로 들어가서 재사용 대기 시간 타이머를 구현해보도록 하지.
 
-We're going to modify our `feedAndMultiply` such that:
+우린 `feedAndMultiply`를 다음과 같이 수정할 것이네: 
 
-1. Feeding triggers a zombie's cooldown, and
+1. 먹이를 먹으면 좀비가 재사용 대기에 들어가고,
 
-2. Zombies can't feed on kitties until their cooldown period has passed
+2. 좀비는 재사용 대기 시간이 지날 때까지 고양이들을 먹을 수 없네.
 
-This will make it so zombies can't just feed on unlimited kitties and multiply all day. In the future when we add battle functionality, we'll make it so attacking other zombies also relies on the cooldown.
+이렇게 하면 좀비들이 끊임없이 고양이들을 먹고 온종일 증식하는 것을 막을 수 있지. 나중에 우리가 전투 기능을 추가하면, 다른 좀비들을 공격하는 것도 재사용 대기 시간에 걸리도록 할 것이네.
 
-First, we're going to define some helper functions that let us set and check a zombie's `readyTime`.
+먼저, 우리가 좀비의 `readyTime`을 설정하고 확인할 수 있도록 해주는 헬퍼 함수를 정의할 것이네.
 
-## Passing structs as arguments
+## 구조체를 인수로 전달하기
 
-You can pass a storage pointer to a struct as an argument to a `private` or `internal` function. This is useful, for example, for passing around our `Zombie` structs between functions.
+자네는 `private` 또는 `internal` 함수에 인수로서 구조체의 storage 포인터를 전달할 수 있네. 이건 예를 들어 함수들 간에 우리의 `Zombie` 구조체를 주고받을 때 유용하네.
 
-The syntax looks like this:
+문법은 이와 같이 생겼네:
 
 ```
 function _doStuff(Zombie storage _zombie) internal {
-  // do stuff with _zombie
+  // _zombie로 할 수 있는 것들을 처리
 }
 ```
 
-This way we can pass a reference to our zombie into a function instead of passing in a zombie ID and looking it up.
+이런 방식으로 우리는 함수에 좀비 ID를 전달하고 좀비를 찾는 대신, 우리의 좀비에 대한 참조를 전달할 수 있네.
 
-## Put it to the test 
+## 직접 해보기
 
-1. Start by defining a `_triggerCooldown` function. It will take 1 argument, `_zombie`, a `Zombie storage` pointer. The function should be `internal`.
+1. `_triggerCooldown`을 정의하면서 시작하지. 이 함수는 1개의 인수로 `Zombie storage` 포인터 타입인 `_zombie`를 받네. 이 함수는 `internal`이어야 하네.
 
-2. The function body should set `_zombie.readyTime` to `uint32(now + cooldownTime)`.
+2. 함수의 내용에서는 `_zombie.readyTime`을 `uint32(now + cooldownTime)`으로 설정해야 하네.
 
-3. Next, create a function called `_isReady`. This function will also take a `Zombie storage` argument named `_zombie`. It will be an `internal view` function, and return a `bool`.
+3. 다음으로, `_isReady`라고 불리는 함수를 만들게. 이 함수 역시 `_zombie`라는 이름의 `Zombie storage` 타입 인수를 받네. `internal view`여야 하고, `bool`을 리턴해야 하네.
 
-4. The function body should return `(_zombie.readyTime <= now)`, which will evaluate to either `true` or `false`. This function will tell us if enough time has passed since the last time the zombie fed.
+4. 함수의 내용에서는 `(_zombie.readyTime <= now)`를 리턴해야 하고, 이는 `true` 아니면 `false`로 계산될 것이네. 이 함수는 우리에게 좀비가 먹이를 먹은 후 충분한 시간이 지났는지 알려줄 것이네.
