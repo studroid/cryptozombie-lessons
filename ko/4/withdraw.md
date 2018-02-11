@@ -1,6 +1,6 @@
 ---
-title: Withdraws
-actions: ['checkAnswer', 'hints']
+title: 출금
+actions: ['정답 확인하기', '힌트 보기']
 requireLogin: true
 material:
   editor:
@@ -20,9 +20,9 @@ material:
             _;
           }
 
-          // 1. Create withdraw function here
+          // 1. 여기에 withdraw 함수를 생성하게
 
-          // 2. Create setLevelUpFee function here
+          // 2. 여기에 setLevelUpFee를 생성하게
 
           function levelUp(uint _zombieId) external payable {
             require(msg.value == levelUpFee);
@@ -244,11 +244,11 @@ material:
       }
 ---
 
-In the previous chapter, we learned how to send Ether to a contract. So what happens after you send it?
+이전 챕터에서, 우린 컨트랙트에 이더를 보내는 방법을 배웠네. 그럼 이더를 보낸 다음에는 어떤 일이 일어날까?
 
-After you send Ether to a contract, it gets stored in the contract's Ethereum account, and it will be trapped there — unless you add a function to withdraw the Ether from the contract. 
+자네가 컨트랙트로 이더를 보내면, 해당 컨트랙트의 이더리움 계좌에 이더가 저장되고 거기에 갇히게 되지 - 자네가 컨트랙트로부터 이더를 인출하는 함수를 만들지 않는다면 말이야.
 
-You can write a function to withdraw Ether from the contract as follows:
+자네는 다음과 같이 컨트랙트에서 이더를 인출하는 함수를 작성할 수 있네:
 
 ```
 contract GetPaid is Ownable {
@@ -258,29 +258,29 @@ contract GetPaid is Ownable {
 }
 ```
 
-Note that we're using `owner` and `onlyOwner` from the `Ownable` contract, assuming that was imported.
+우리가 `Ownable` 컨트랙트를 import 했다고 가정하고 `owner`와 `onlyOwner`를 사용하고 있다는 것을 참고하게.
 
-You can transfer Ether to an address using the `transfer` function, and `this.balance` will return the total balance stored on the contract. So if 100 users had paid 1 Ether to our contract, `this.balance` would equal 100 Ether.
+자네는 `transfer` 함수를 사용해서 이더를 특정 주소로 전달할 수 있네. 그리고 `this.balance`는 컨트랙트에 저장돼있는 전체 잔액을 반환하지. 그러니 100명의 사용자가 우리의 컨트랙트에 1이더를 지불했다면, `this.balance`는 100이더가 될 것이네.
 
-You can use `transfer` to send funds to any Ethereum address. For example, you could have a function that transfers Ether back to the `msg.sender` if they overpaid for an item:
+자네는 `transfer` 함수를 써서 특정한 이더리움 주소에 돈을 보낼 수 있네. 예를 들어, 만약 누군가 한 아이템에 대해 초과 지불을 했다면, 이더를 `msg.sender`로 되돌려주는 함수를 만들 수도 있네:
 
 ```
 uint itemFee = 0.001 ether;
 msg.sender.transfer(msg.value - itemFee);
 ```
 
-Or in a contract with a buyer and a seller, you could save the seller's address in storage, then when someone purchases his item, transfer him the fee paid by the buyer: `seller.transfer(msg.value)`.
+혹은 구매자와 판매자가 존재하는 컨트랙트에서, 판매자의 주소를 storage에 저장하고, 누군가 판매자의 아이템을 구매하면 구매자로부터 받은 요금을 그에게 전달할 수도 있겠지: `seller.transfer(msg.value)`.
 
-These are some examples of what makes Ethereum programming really cool — you can have decentralized marketplaces like this that aren't controlled by anyone.
+이런 것들이 이더리움 프로그래밍을 아주 멋지게 만들어주는 예시들이네 - 자네는 이것처럼 누구에게도 제어되지 않는 분산 장터들을 만들 수도 있네.
 
-## Putting it to the Test
+## 직접 해보기
 
-1. Create a `withdraw` function in our contract, which should be identical to the `GetPaid` example above.
+1. 우리 컨트랙트에 `withdraw` 함수를 생성하게. 이 함수는 위에서 본 `GetPaid` 예제와 동일해야 하네.
 
-2. The price of Ether has gone up over 10x in the past year. So while 0.001 ether is about $1 at the time of this writing, if it goes up 10x again, 0.001 ETH will be $10 and our game will be a lot more expensive.
+2. 이더의 가격은 과거에 비해 10배 이상 뛰었네. 그러니 지금 이 글을 쓰는 시점에서는 0.001이더가 1달러 정도 되지만, 만약 이게 다시 10배가 되면 0.001 ETH는 10달러가 될 것이고 우리의 게임은 더 비싸질 것이네.
 
-  So it's a good idea to create a function that allows us as the owner of the contract to set the `levelUpFee`.
-
-  a. Create a function called `setLevelUpFee` that takes one argument, `uint _fee`, is `external`, and uses the modifier `onlyOwner`.
-
-  b. The function should set `levelUpFee` equal to `_fee`.
+  그러니 컨트랙트의 소유자로서 우리가 `levelUpFee`를 설정할 수 있도록 하는 함수를 만드는 것이 좋겠지.
+  
+  a. `setLevelupFee`라는 이름의, `uint _fee`를 하나의 인자로 받고 `external`이며 `onlyOwner` 제어자를 사용하는 함수를 생성하게.
+  
+  b. 이 함수는 `levelUpFee`를 `_fee`로 설정해야 하네.
