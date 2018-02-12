@@ -1,6 +1,6 @@
 ---
-title: Zombie Battles
-actions: ['checkAnswer', 'hints']
+title: 좀비 전투
+actions: ['정답 확인하기', '힌트 보기']
 requireLogin: true
 material:
   editor:
@@ -207,18 +207,18 @@ material:
       }
 ---
 
-Now that we've learned about payable functions and contract balances, it's time to add functionality for zombie battles!
+돈을 지불할 수 있는 함수와 컨트랙트 잔고에 대해 배웠으니, 이제 좀비 전투를 위한 기능을 추가할 때이네!
 
-Following the format from previous chapters, we'll organize our code by creating a new file / contract for the attack functionality that imports from the previous contract.
+이전 챕터들에서 본 형식을 따라, 공격 기능을 위해 이전의 컨트랙트를 import 하는 새로운 파일/컨트랙트를 생성하면서 우리의 코드를 구성할 것이네.
 
-## Put it to the test
+## 직접 해보기
 
-Let's review creating a new contract. Repetition leads to mastery!
+새로운 컨트랙트를 만드는 방법을 복습해보세. 반복하면 통달하게 되네! 
 
-If you can't remember the syntax for doing these, check `zombiehelper.sol` for the syntax — but try to do it without peeking first to test your knowledge.
+만약 이를 위한 문법이 기억나지 않는다면, `zombiehelper.sol`을 확인해보게 - 하지만 자네의 지식을 시험해보기 위해 우선 보지 말고 시도해보시게.
 
-1. Declare at the top of the file that we're using Solidity version `^0.4.19`.
+1. 우리가 사용할 솔리디티 버전인 `^0.4.19`를 파일의 상단에 선언하게.
 
-2. `import` from `zombiehelper.sol`.
+2. `zombiehelper.sol`을 `import` 하게.
 
-3. Declare a new `contract` called `ZombieBattle` that inherits from `ZombieHelper`. Leave the contract body empty for now.
+3. `ZombieHelper`를 상속하는 `ZombieBattle`이라는 이름의 새 `contract`를 선언하게. 컨트랙트의 내용은 지금은 비워두게.
