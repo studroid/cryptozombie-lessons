@@ -1,5 +1,5 @@
 ---
-title: Zombie Fightin'
+title: 좀비 싸움
 actions: ['checkAnswer', 'hints']
 requireLogin: true
 material:
@@ -11,14 +11,14 @@ material:
 
         contract ZombieBattle is ZombieHelper {
           uint randNonce = 0;
-          // Create attackVictoryProbability here
+          // 여기에 attackVictoryProbabillity를 만들게
 
           function randMod(uint _modulus) internal returns(uint) {
             randNonce++;
             return uint(keccak256(now, msg.sender, randNonce)) % _modulus;
           }
 
-          // Create new function here
+          // 여기에 새로운 함수를 만들게
         }
       "zombiehelper.sol": |
         pragma solidity ^0.4.19;
@@ -227,23 +227,23 @@ material:
       }
 ---
 
-Now that we have a source of some randomness in our contract, we can use it in our zombie battles to calculate the outcome.
+이제 우리의 컨트랙트에 어느 정도 예측이 불가능하도록 하는 성질이 생겼으니, 좀비 전투에서 결과를 계산할 때 이를 사용할 수 있네.
 
-Our zombie battles will work as follows:
+좀비 전투는 다음과 같이 진행될 것이네:
 
-- You choose one of your zombies, and choose an opponent's zombie to attack.
-- If you're the attacking zombie, you will have a 70% chance of winning. The defending zombie will have a 30% chance of winning.
-- All zombies (attacking and defending) will have a `winCount` and a `lossCount` that will increment depending on the outcome of the battle.
-- If the attacking zombie wins, it levels up and spawns a new zombie.
-- If it loses, nothing happens (except its `lossCount` incrementing).
-- Whether it wins or loses, the attacking zombie's cooldown time will be triggered.
+- 자네가 자네 좀비 중 하나를 고르고, 상대방의 좀비를 공격 대상으로 선택하네.
+- 자네가 공격하는 쪽의 좀비라면, 자네는 70%의 승리 확률을 가지네. 방어하는 쪽의 좀비는 30%의 승리 확률을 가질 것이네.
+- 모든 좀비들(공격, 방어 모두)은 전투 결과에 따라 증가하는 `winCount`와 `lossCount`를 가질 것이네.
+- 공격하는 쪽의 좀비가 이기면, 좀비의 레벨이 오르고 새로운 좀비가 생기네.
+- 좀비가 지면, 아무것도 일어나지 않네(좀비의 `lossCount`가 증가하는 것 빼고 말이야).
+- 좀비가 이기든 지든, 공격하는 쪽 좀비의 재사용 대기시간이 활성화될 것이네.
 
-This is a lot of logic to implement, so we'll do it in pieces over the coming chapters.
+구현할 내용이 많으니, 다음 챕터로 진행하면서 나눠서 구현할 것이네.
 
-## Put it to the test
+## 직접 해보기
 
-1. Give our contract a `uint` variable called `attackVictoryProbability`, and set it equal to `70`.
+1. 컨트랙트에 `attackVictoryProbabillity`라는 이름의 `uint` 변수를 추가하고, 여기에 `70`을 대입하게.
 
-2. Create a function called `attack`. It will take two parameters: `_zombieId` (a `uint`) and `_targetId` (also a `uint`). It should be an `external` function.
+2. `attack`이라는 이름의 함수를 생성하게. 이 함수는 두 개의 매개변수를 받을 것이네: `_zombieId`(`uint`)와 `_targetId`(`uint`)이네. 이 함수는 `external`이어야 하네.
 
-Leave the function body empty for now.
+지금은 함수의 내용을 비워두도록 하게.
