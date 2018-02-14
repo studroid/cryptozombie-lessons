@@ -1,5 +1,5 @@
 ---
-title: More Refactoring
+title: 구조 더 개선하기
 actions: ['checkAnswer', 'hints']
 requireLogin: true
 material:
@@ -28,13 +28,13 @@ material:
             levelUpFee = _fee;
           }
 
-          // 1. Modify this function to use `ownerOf`:
+          // 1. 이 함수를 `ownerOf`를 사용하도록 변경하게:
           function changeName(uint _zombieId, string _newName) external aboveLevel(2, _zombieId) {
             require(msg.sender == zombieToOwner[_zombieId]);
             zombies[_zombieId].name = _newName;
           }
 
-          // 2. Do the same with this function:
+          // 2. 이 함수에도 똑같이 적용하게:
           function changeDna(uint _zombieId, uint _newDna) external aboveLevel(20, _zombieId) {
             require(msg.sender == zombieToOwner[_zombieId]);
             zombies[_zombieId].dna = _newDna;
@@ -257,10 +257,10 @@ material:
       }
 ---
 
-We have a couple more places in `zombiehelper.sol` where we need to implement our new `modifier` `ownerOf`.
+`zombiehelper.sol`에 우리의 새로운 `modifier` `ownerOf`를 적용할 필요가 있는 부분이 두 군데 더 있네.
 
-## Put it to the test
+## 직접 해보기
 
-1. Update `changeName()` to use `ownerOf`
+1. `changeName()`를 `ownerOf`를 사용하도록 변경하게.
 
-2. Update `changeDna()` to use `ownerOf`
+2. `changeDna()`를 `ownerOf`를 사용하도록 변경하게.
