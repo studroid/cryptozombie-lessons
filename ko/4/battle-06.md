@@ -1,5 +1,5 @@
 ---
-title: Back to Attack!
+title: 공격으로 돌아가자!
 actions: ['checkAnswer', 'hints']
 requireLogin: true
 material:
@@ -18,9 +18,9 @@ material:
             return uint(keccak256(now, msg.sender, randNonce)) % _modulus;
           }
 
-          // 1. Add modifier here
+          // 1. 여기에 제어자를 추가하게
           function attack(uint _zombieId, uint _targetId) external {
-            // 2. Start function definition here
+            // 2. 여기서 함수 정의를 시작하게
           }
         }
       "zombiehelper.sol": |
@@ -230,18 +230,18 @@ material:
       }
 ---
 
-Enough refactoring — back to `zombieattack.sol`.
+구조는 충분히 개선한 것 같군 - `zombieattack.sol`로 돌아가세.
 
-We're going to continue defining our `attack` function, now that we have the `ownerOf` modifier to use.
+이제 `ownerOf` 제어자도 사용할 수 있으니, 우린 `attack` 함수를 계속 정의해나갈 것이네. 
 
-## Put it to the test
+## 직접 해보기
 
-1. Add the `ownerOf` modifier to `attack` to make sure the caller owns `_zombieId`.
+1. 함수를 호출하는 사람이 `_zombieId`를 소유하고 있는지 확인하기 위해 `attack` 함수에 `ownerOf` 제어자를 추가하게.
 
-2. The first thing our function should do is get a `storage` pointer to both zombies so we can more easily interact with them:
+2. 우리 함수에서 처음으로 해야 할 것은 두 좀비의 `storage` 포인터를 얻어서 그들과 상호작용 하기 쉽도록 하는 것이네.
 
-  a. Declare a `Zombie storage` named `myZombie`, and set it equal to `zombies[_zombieId]`.
-
-  b. Declare a `Zombie storage` named `enemyZombie`, and set it equal to `zombies[_targetId]`.
-
-3. We're going to use a random number between 0 and 99 to determine the outcome of our battle. So declare a `uint` named `rand`, and set it equal to the result of the `randMod` function with `100` as an argument.
+  a. `Zombie storage`를 `myZombie`라는 이름으로 선언하고, 여기에 `zombies[_zombieId]`를 대입하게.
+  
+  b. `Zombie storage`를 `enemyZombie`라는 이름으로 선언하고, 여기에 `zombies[_targetId]`를 대입하게.
+  
+3. 우린 전투의 결과를 결정하기 위해 0과 99 사이의 난수를 사용할 것이네. 그러니 `uint`를 `rand`라는 이름으로 선언하고, 여기에 `randMod` 함수에 `100`을 인수로 사용한 값을 대입하게.
