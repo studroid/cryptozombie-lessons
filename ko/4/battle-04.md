@@ -1,5 +1,5 @@
 ---
-title: Refactoring Common Logic
+title: 공통 로직 구조 개선하기(Refactoring)
 actions: ['checkAnswer', 'hints']
 requireLogin: true
 material:
@@ -30,7 +30,7 @@ material:
 
           KittyInterface kittyContract;
 
-          // 1. Create modifier here
+          // 1. 여기에 제어자를 생성하게
 
           function setKittyContractAddress(address _address) external onlyOwner {
             kittyContract = KittyInterface(_address);
@@ -44,9 +44,9 @@ material:
               return (_zombie.readyTime <= now);
           }
 
-          // 2. Add modifier to function definition:
+          // 2. 함수 정의 부분에 제어자를 추가하게:
           function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) internal {
-            // 3. Remove this line
+            // 3. 이 줄을 지우게
             require(msg.sender == zombieToOwner[_zombieId]);
             Zombie storage myZombie = zombies[_zombieId];
             require(_isReady(myZombie));
@@ -276,34 +276,34 @@ material:
       }
 ---
 
-Whoever calls our `attack` function — we want to make sure the user actually owns the zombie they're attacking with. It would be a security concern if you could attack with someone else's zombie!
+누가 우리의 `attack` 함수를 실행하든지 - 우리는 사용자가 공격에 사용하는 좀비를 실제로 소유하고 있다는 것을 확실히 하고 싶네. 만약 자네가 다른 사람의 좀비를 사용해서 공격할 수 있다면 보안에 문제가 되는 부분일 것이야!
 
-Can you think of how we would add a check to see if the person calling this function is the owner of the `_zombieId` they're passing in?
+함수를 호출하는 사람이 그가 사용한 `_zombieId`의 소유자인지 확인할 방법을 생각해낼 수 있겠는가?
 
-Give it some thought, and see if you can come up with the answer on your own.
+좀 더 생각해보면서, 자네 스스로 답을 생각해낼 수 있는지 학인해보게.
 
-Take a moment... Refer to some of our previous lessons' code for ideas...
+시간을 가지고... 아이디어를 위해 지난 레슨들을 참고해보게...
 
-Answer below, don't continue until you've given it some thought.
+해결책은 아래에 있지만, 생각이 나기 전에는 보지 말도록 하게.
 
-## The answer
+## 해결책
 
-We've done this check multiple times now in previous lessons. In `changeName()`, `changeDna()`, and `feedAndMultiply()`, we used the following check:
+우린 이전 레슨들에서 이런 종류의 확인을 여러 번 해왔었네. `changeName()`, `changeDna()`, `feedMultiply()`에서, 우리는 다음과 같은 방식을 썼네:
 
 ```
 require(msg.sender == zombieToOwner[_zombieId]);
 ```
 
-This is the same logic we'll need for our `attack` function. Since we're using the same logic multiple times, let's move this into its own `modifier` to clean up our code and avoid repeating ourselves.
+우리의 `attack` 함수에도 똑같은 내용을 적용할 필요가 있네. 동일한 내용을 여러 번 사용하고 있으니, 코드를 정리하고 반복을 피할 수 있도록 이 내용을 이것만의 `modifier`로 옮기도록 하세.
 
-## Put it to the test
+## 직접 해보기
 
-We're back to `zombiefeeding.sol`, since this is the first place we used that logic. Let's refactor it into its own `modifier`.
+`zombiefeeding.sol`을 다시 보도록 하겠네. 저 내용을 처음으로 썼던 곳이니 말이야. 확인 부분을 그 부분만의 `modifier`로 만들어 구조를 개선하겠네.
 
-1. Create a `modifier` called `ownerOf`. It will take 1 argument, `_zombieId` (a `uint`).
+1. `modifier`를 `onwerOf`라는 이름으로 만들게. 이 제어자는 `_zombieId`(`uint`)를 1개의 인수로 받을 것이네.
 
-  The body should `require` that `msg.sender` is equal to `zombieToOwner[_zombieId]`, then continue with the function. You can refer to `zombiehelper.sol` if you don't remember the syntax for a modifier.
+  제어자 내용에서는 `msg.sender`와 `zombieToOwner[_zombieId]`가 같은지 `require`로 확인하고, 함수를 실행해야 하네. 제어자의 문법이 기억이 나지 않는다면 `zombiehelper.sol`을 참고하면 되네.
+  
+2. `feedAndMultiply`의 함수 정의 부분을 `ownerOf` 제어자를 사용하도록 바꾸게.
 
-2. Change the function definition of `feedAndMultiply` such that it uses the modifier `ownerOf`.
-
-3. Now that we're using a `modifier`, you can remove the line `require(msg.sender == zombieToOwner[_zombieId]);`
+3. 이제 `modifier`를 사용하게 됐으니, `require(msg.sender == zombieToOwner[_zombieId]);` 줄을 지워도 되네.
