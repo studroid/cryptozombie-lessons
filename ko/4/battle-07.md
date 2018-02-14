@@ -1,5 +1,5 @@
 ---
-title: Zombie Wins and Losses
+title: 좀비 승리와 패배
 actions: ['checkAnswer', 'hints']
 requireLogin: true
 material:
@@ -24,7 +24,7 @@ material:
               uint dna;
               uint32 level;
               uint32 readyTime;
-              // 1. Add new properties here
+              // 1. 여기에 새로운 속성을 추가하게
             }
 
             Zombie[] public zombies;
@@ -33,7 +33,7 @@ material:
             mapping (address => uint) ownerZombieCount;
 
             function _createZombie(string _name, uint _dna) internal {
-                // 2. Modify new zombie creation here:
+                // 2. 여기서 새로운 좀비의 생성을 수정하게:
                 uint id = zombies.push(Zombie(_name, _dna, 1, uint32(now + cooldownTime))) - 1;
                 zombieToOwner[id] = msg.sender;
                 ownerZombieCount[msg.sender]++;
@@ -262,24 +262,25 @@ material:
       }
 ---
 
-For our zombie game, we're going to want to keep track of how many battles our zombies have won and lost. That way we can maintain a "zombie leaderboard" in our game state.
+우리의 좀비 게임에서, 우린 좀비들이 얼마나 많이 이기고 졌는지를 추적하고 싶게 될 것이네. 이렇게 하면 우리는 게임 상에서 "좀비 순위표"를 유지할 수 있게 되지.
 
-We could store this data in a number of ways in our DApp — as individual mappings, as leaderboard Struct, or in the `Zombie` struct itself.
+우린 DApp에서 다양한 방식으로 이 데이터를 저장할 수 있네 - 개별적인 매핑으로, 순위표 구조체로, 혹은 `Zombie` 구조체 자체에 넣을 수도 있네.
 
-Each has its own benefits and tradeoffs depending on how we intend on interacting with the data. In this tutorial, we're going to store the stats on our `Zombie` struct for simplicity, and call them `winCount` and `lossCount`.
+우리가 이 데이터로 어떻게 상호작용 할 것인지에 따라 각각의 방식 모두 장단점이 있네. 이 튜토리얼에서는, 간결함을 유지할 수 있도록 `Zombie` 구조체에 상태를 저장하도록 하고, 이들을 `winCount`와 `lossCount`로 이름짓도록 하겠네.
 
-So let's jump back to `zombiefactory.sol`, and add these properties to our `Zombie` struct.
+이제 `zombiefactory.sol`로 돌아가서 우리 `Zombie` 구조체에 이 속성들을 추가하게.
 
-## Put it to the test
+## 직접 해보기
 
-1. Modify our `Zombie` struct to have 2 more properties:
+1. `Zombie` 구조체가 2개의 속성을 더 가지도록 수정하게:
 
-  a. `winCount`, a `uint16`
+  a. `winCount`, `uint16` 타입
 
-  b. `lossCount`, also a `uint16`
+  b. `lossCount`, 역시 `uint16` 타입
 
-  >Note: Remember, since we can pack `uint`s inside structs, we want to use the smallest `uint`s we can get away with. A `uint8` is too small, since 2^8 = 256 — if our zombies attacked once per day, they could overflow this within a year. But 2^16 is 65536 — so unless a user wins or loses every day for 179 years straight, we should be safe here.
+  >참고: 기억하게, 구조체 안에서 `uint`들을 압축(pack)할 수 있으니, 우리가 다룰 수 있는 가장 작은 `uint` 타입을 사용하는 것이 좋을 것이네. `uint8`은 너무 작을 것이네. 2^8 = 256이기 때문이지 - 만약 우리 좀비가 하루에 한 번씩 공격한다면, 일 년 안에 데이터 크기가 넘쳐버릴 수 있을 것이네. 하지만 2^16은 65536이네 - 그러니 한 사용자가 매일 179년 동안 이기거나 지지 않는다면, 이걸로 안전할 것이네.
+  
+2. 이제 우리는 `Zombie` 구조체에 새로운 속성들을 가지게 되었으니, `_createZombie()`의 함수 정의 부분을 수정해야 할 필요가 있네.
 
-2. Now that we have new properties on our `Zombie` struct, we need to change our function definition in `_createZombie()`.
-
-  Change the zombie creation definition so it creates each new zombie with `0` wins and `0` losses.
+  각각의 새로운 좀비가 `0`승 `0`패를 가지고 생성될 수 있도록 좀비 생성의 정의 부분을 변경하게.
+  
