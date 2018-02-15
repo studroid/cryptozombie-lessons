@@ -1,5 +1,5 @@
 ---
-title: Zombie Victory 😄
+title: 좀비 승리 😄
 actions: ['checkAnswer', 'hints']
 requireLogin: true
 material:
@@ -22,7 +22,7 @@ material:
             Zombie storage myZombie = zombies[_zombieId];
             Zombie storage enemyZombie = zombies[_targetId];
             uint rand = randMod(100);
-            // Start here
+            // 여기서 시작하게
           }
         }
       "zombiehelper.sol": |
@@ -240,20 +240,21 @@ material:
       }
 ---
 
-Now that we have a `winCount` and `lossCount`, we can update them depending on which zombie wins the fight.
+이제 우리는 `winCount`와 `lossCount`를 가지고 있으니, 어떤 좀비가 싸움에서 이기냐에 따라 이들을 업데이트할 수 있네.
 
-In chapter 6 we calculated a random number from 0 to 100. Now let's use that number to determine who wins the fight, and update our stats accordingly.
+챕터 6에서 우린 0부터 100까지의 난수를 계산했네. 이제 그 숫자를 누가 싸움에서 이길지 결정하는 데에 사용하고, 그에 따라 상태를 업데이트하세. 
 
-## Put it to the test
+## 직접 해보기
 
-1. Create an `if` statement that checks if `rand` is **_less than or equal to_** `attackVictoryProbability`.
+1. `rand`가 `attackVictoryProbabillity`와 **_같거나 더 작은지_** 확인하는 `if` 문장을 만들게.
 
-2. If this condition is true, our zombie wins! So:
+2. 만약 이 조건이 참이라면, 우리 좀비가 이기게 되네! 그렇다면:
 
-  a. Increment `myZombie`'s `winCount`.
+  a. `myZombie`의 `winCount`를 증가시키게.
 
-  b. Increment `myZombie`'s `level`. (Level up!!!!!!!)
+  b. `myZombie`의 `level`을 증가시키게. (레벨업이다!!!!!!!)
+  
+  c. `enemyZombie`의 `lossCount`를 증가시키게. (이 패배자!!!!!!! 😫 😫 😫)
 
-  c. Increment `enemyZombie`'s `lossCount`. (Loser!!!!!! 😫 😫 😫)
-
-  d. Run the `feedAndMultiply` function. Check `zombiefeeding.sol` to see the syntax for calling it. For the 3rd argument (`_species`), pass the string `"zombie"`. (It doesn't actually do anything at the moment, but later we could add extra functionality for spawning zombie-based zombies if we wanted to).
+  d. `feedAndMultiply` 함수를 실행하게. 실행을 위한 문법을 보려면 `zombiefeeding.sol`을 확인하게. 3번째 인수(`_species`)로는 `"zombie"`라는 문자열을 전달하게(이건 지금 이 순간에는 실제로 아무 것도 하지 않지만, 이후에 우리가 원한다면 좀비 기반의 좀비를 만들어내는 부가적인 기능을 추가할 수도 있을 것이네).
+  
