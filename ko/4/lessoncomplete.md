@@ -1,5 +1,5 @@
 ---
-title: Lesson 4 Complete!
+title: 레슨 4 완료!
 actions: ['checkAnswer', 'hints']
 material:
   lessonComplete:
