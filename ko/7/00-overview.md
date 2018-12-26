@@ -1,19 +1,19 @@
 ---
-title: "Custom Game Modes: Zombie Battleground"
-header: "Custom Game Modes: Zombie Battleground"
+title: "커스텀 게임 모드: 좀비 배틀그라운드"
+header: "커스텀 게임 모드: 좀비 배틀그라운드"
 roadmap: roadmap6.png
 ---
 
-Welcome, veteran CryptoZombie!
+환영한다, 베테랑 크립토좀비여!
 
-In this course, we are going to venture into the land of real game development.
+이 코스에서는 실제 게임 개발 영역을 배우게 될 것이라네.
 
-You will be building a *custom game mode* for our blockchain-based mobile card game, <a href="https://loom.games" target=_blank>Zombie Battleground</a>. 
+자네는 우리의 블록체인 기반 모바일 카드 게임, <a href="https://loom.games" target=_blank>좀비 배틀그라운드</a>의 *커스텀 게임 모드*를 만들게 될 걸세.
 
-**Once you complete this course, you’ll have the skillset to build your own mod of Zombie Battleground**. Very soon we'll be launching a custom game creator tool, and you'll be able to deploy these mods to Loom GameChain, where they will be immediately playable by thousands of real Zombie Battleground players.
+**이 코스가 끝나면, 자네만의 좀비 배틀그라운드 모드를 만들 수 있는 능력을 갖출 수 있다네.** 곧 우리가 커스텀 게임 생성 도구를 출시하면, Loom GameChain에 자네의 모드를 배포할 수 있을 것이라네. 모드가 배포되고 나면, 수천 명의 실제 좀비 배틀그라운드 플레이어들이 즉시 플레이할 수 있지.
 
-Pretty cool, right?
+멋지지 않은가?
 
-Okay, let's start building the next great Ethereum game- Aliens vs Zombies!😆😆😆
+좋아, 이제 차세대 이더리움 게임을 만들어 보세- 에일리언 vs 좀비! 😆😆😆
 
-If you’re ready… Then let’s dive right in and build your first mod!
+준비되었다면... 어서 레슨을 시작하고 자네의 첫 모드를 만들어보게!
