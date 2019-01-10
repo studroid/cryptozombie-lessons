@@ -1,13 +1,13 @@
 ---
-title: "Custom Deck Rules"
-header: "Custom Deck Rules"
+title: "커스텀 덱 규칙"
+header: "커스텀 덱 규칙"
 roadmap: roadmap6.png
 ---
 
-Now that we've got the basics of Zombie Battleground custom game modes under our belt, let's look at a few examples of implementing custom deck rules.
+이제 좀비 배틀그라운드 커스텀 게임 모드의 기초를 잘 다졌으니, 커스텀 덱 규칙 구현의 몇 가지 예를 살펴보도록 하지.
 
-This lesson contains **three examples** of game modes with custom deck rules — and should give you a good foundation in understanding what kind of things are possible... 
+이 레슨은 커스텀 덱 규칙을 가진 **세 가지 게임 모드 예제**를 포함하고 있다네 - 그리고 자네에게 어떤 것들이 가능한지를 이해할 수 있는 좋은 토대가 될걸세...
 
-And hopefully give you some ideas for your own custom game modes you want to build!
+이 레슨을 통해 자네가 만들고자 하는 커스텀 게임 모드에 대한 아이디어를 얻을 수 있기를 바라네.
 
-Are you ready to get started?
+자, 시작할 준비가 되었나?
