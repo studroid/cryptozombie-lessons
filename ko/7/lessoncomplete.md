@@ -1,25 +1,25 @@
 ---
-title: Lesson 7 Complete!
+title: 레슨 7 완료!
 actions: ['checkAnswer', 'hints']
 material:
   lessonComplete:
     answer: 1
 ---
 
-Congrats! You've just created your very first game mod for Zombie Battleground!
+축하하네! 자네는 방금 막 자네의 좀비 배틀그라운드 첫 번째 게임 모드를 만들었네!
 
-This lesson was intended to get you familiar with all the syntax behind custom game modes, and showing you what types of changes are possible.
+이 레슨은 커스텀 게임 모드에 쓰이는 모든 문법들에 자네가 더 익숙해지도록 하기 위해, 그리고 어떤 종류의 변화들이 가능한지 보여주기 위해 만들어졌네.
 
-In Lesson 2, we'll be looking at some more realistic game modes — where we apply some custom rules to deck selection, such as:
+두 번째 레슨에서는, 더 현실적인 게임 모드들을 살펴볼 것이네 - 덱 선택에 몇몇 커스텀 규칙들을 적용할 모드들이지. 예를 들면:
 
-1. Players can only use cards that cost less than 2 goo
+1. 플레이어들은 2 Goo보다 비용이 적은 카드들만 쓸 수 있다.
 
-2. Players cannot have duplicate cards in their deck
+2. 플레이어들은 덱에 중복 카드를 넣을 수 없다.
 
-3. Before the match, both players' decks are shuffled together, and then distributed back randomly (so each player ends up with a mix of his cards and his opponents').
+3. 매치 시작 전에, 두 플레이어의 덱을 하나로 섞고, 임의로 다시 배분한다(각 플레이어가 자신의 카드와 상대방의 카드가 섞인 것을 받음).
 
-In the very very near future, we'll be launching a "Zombie Battleground Custom Game Creator" tool, which you can use to deploy your own custom game modes directly to Loom GameChain — and every Zombie Battleground player will be able to load your game mode and start playing it!
+아주 가까운 시일 내에, 우리는 "좀비 배틀그라운드 커스텀 게임 제작 도구"를 출시할 것이네. 이를 써서 자네만의 커스텀 게임 모드를 Loom GameChain에 바로 배포할 수 있지 - 그리고 모든 좀비 배틀그라운드 플레이어가 자네의 게임을 불러와서 플레이하기 시작할 것이네!
 
-We'll let you know as soon as the game creator tool goes live.
+게임 제작 도구가 출시되는 대로 자네에게 알려주겠네.
 
-But in the meantime, you can proceed to Lesson 2 — and become expert by the time we roll it out!
+하지만 그동안에, 두 번째 레슨을 계속 진행하게 - 그리고 출시할 떄까지 전문가가 되도록 하게!
