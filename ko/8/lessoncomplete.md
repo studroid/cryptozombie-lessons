@@ -1,21 +1,21 @@
 ---
-title: Lesson 8 Complete!
+title: 레슨 8 완료!
 actions: ['checkAnswer', 'hints']
 material:
   lessonComplete:
     answer: 1
 ---
 
-You're a legend!
+자네는 전설이라네!
 
-You've now implemented **three** custom game modes with custom deck rules.
+이제 자네는 커스텀 덱 규칙을 적용한 **세 가지** 커스텀 게임 모드를 구현했다네.
 
-See how easy that can be?
+참 쉽지 않은가?
 
-Now only your imagination is the limit... 
+자, 이제 자네의 상상만이 유일한 한계라네...
 
-In the very near future, you'll be able to use our Zombie Battleground Custom Game Creator tool to deploy your own smart contracts directly to Loom GameChain — and every Zombie Battleground player will be able to load your game mode and start playing it!
+조만간 자네만의 스마트 컨트랙트를 Loom GameChain에 직접 배포하기 위해 우리의 좀비 배틀그라운드 커스텀 게임 생성 도구를 사용할 수 있게 될 것이네 — 그리고 모든 좀비 배틀그라운드 플레이어가 자네의 게임 모드를 불러와서 플레이할 수 있게 될 걸세!
 
-You can get a headstart now by starting to brainstorm your own custom game modes and writing out the Solidity contracts.
+자네만의 커스텀 게임 모드에 대한 브레인스토밍을 시작하고 솔리디티 컨트랙트를 작성하면 남들보다 빠르게 시작할 수 있을 걸세.
 
-And we'll let you know as soon as the game creator tool goes live.
+그리고 게임 생성 도구가 활성화되는 즉시 우리가 자네에게 알려주겠네.
