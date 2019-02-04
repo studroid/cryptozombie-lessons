@@ -1,24 +1,24 @@
 ---
-title: "ERC721x: Multi Fungible Tokens"
-header: "ERC721x: Multi Fungible Tokens"
+title: "ERC721x: 다중 대체형 토큰(Multi Fungible Tokens)"
+header: "ERC721x: 다중 대체형 토큰(Multi Fungible Tokens)"
 roadmap: roadmap.jpg
 
 ---
 
-Welcome, CryptoZombie!
+환영하네, 크립토좀비여!
 
-In this intermediate lesson, we will be learning about **ERC721x Multi-Fungible Tokens**.
+이 중급 레슨에서, 우리는 **ERC721x 다중 대체형 토큰(Multi-Fungible Tokens)**에 대해 배울 것이네.
 
-What is a multi-fungible token, you ask?
+다중 대체형 토큰이 무엇인지, 궁금한가?
 
-With Non-Fungible Tokens (NFTs) like ERC721, every item is totally 100% unique. But Multi-Fungible Tokens recognize that in most games, you will want to have *multiple identical copies of the same item*.
+ERC721과 같은 대체 불가 토큰(Non-Fungible Tokens, NFT)에서는, 모든 아이템은 완전히 100% 고유한 것이네. 하지만 대부분의 게임에서 자네가 *똑같은 한 아이템의 여러 복제본*을 원할 것을 알기에 다중 대체형 토큰이 나오게 되었지.
 
-For example, your Master Sword is probably exactly the same as my Master Sword — they look the same, do the same damage, and have the exact same functionality. Thus we would call these items "fungible", because we could trade our Master Swords without either one of us minding — there is no difference between them.
+예를 들어, 자네의 마스터 소드는 내 마스터 소드와 정확히 같을 것이네 - 똑같은 모양에, 똑같은 공격력을 가지고, 똑같은 기능을 가지지. 그러니 우리는 이러한 아이템들을 "대체형"이라고 부를 것이네. 우리가 우리의 마스터 소드들을 서로 교환할 때 거리낄 것이 없기 때문이지 - 두 소드의 차이는 전혀 없네.
 
-Of course, this isn't always the case. For some items, maybe we do want them to be one of a kind.
+물론 항상 이렇지만은 않네. 어떤 아이템들은 유일한 것이길 원할 수도 있을 것이네.
 
-Thus, ERC721x gives you the flexibility to do both — and to manage all the items in your game, both fungible and non-fungible, within one single smart contract. And best of all, it's fully backward-compatible with ERC721.
+그래서, ERC721x는 자네에게 둘 다 할 수 있는 유연성을 제공하네 - 그리고 단 하나의 스마트 컨트랙트를 통해 자네의 게임에서 대체형과 대체 불가형 아이템들 모두를 관리할 수 있도록 하지. 그리고 무엇보다, 이는 ERC721과 완전히 하위 호환이 가능하네.
 
-In this lesson, you will learn how to use it in your game.
+이번 레슨에서, 자네의 게임에서 이를 쓰는 방법을 배울 것이네.
 
-Are you ready to get started?
+시작할 준비 되었나?
