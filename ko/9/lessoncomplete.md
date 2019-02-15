@@ -1,25 +1,25 @@
 ---
-title: Lesson Complete!
+title: 레슨 9 완료!
 actions: ['checkAnswer', 'hints']
 material:
   lessonComplete:
     answer: 1
 ---
 
-## Congratulations! You've now implemented your first ERC721x token.
+## 축하하네! 자네는 방금 막 자네의 첫 ERC721x 토큰을 구현했네.
 
-This was just an example implementation — there are many different design decisions you could make with your token contract depending on the type of items you want to have in your game, and how you want your players to receive and interact with them.
+이것은 그저 하나의 예제를 구현한 것일 뿐이라네 — 자네가 게임에서 갖고 싶은 아이템의 타입과 자네의 플레이어들이 그 아이템을 어떻게 받고 상호작용하는지에 따라, 자네의 토큰 컨트랙트를 다양하게 설계할 수 있다네.
 
-We've looked at how to have items with infinite supply as well as rare items with a fixed supply; how to control who, how, and when new items can be minted; how users will receive the items; and how the items can be converted to be backward compatible with legacy ERC721 services.
+지금까지 우리는 다음과 같은 것들을 배웠네 — 무한히 공급되는 아이템과 고정된 공급량을 가지는 희귀 아이템을 가지는 방법; 누가, 언제, 어떻게 새로운 아이템을 발행하는지를 통제하는 방법; 사용자가 아이템을 받는 방법; 아이템이 기존의 ERC721 서비스와 하위 호환이 가능하도록 변환하는 방법 말이네.
 
-You can change the way some of these functions work depending on your needs.
+자네의 필요에 따라 이 함수들을 다르게 적용해도 된다네.
 
-### Next Steps
+### 다음 단계
 
-For implementing ERC721x in your next project, go ahead and head over to our open source implementation on <a href="https://github.com/loomnetwork/erc721x" target=_blank>GitHub</a>.
+자네의 다음 프로젝트에서 ERC721x를 구현하려면, 먼저 우리 <a href="https://github.com/loomnetwork/erc721x" target=_blank>GitHub</a>에 올라와 있는 오픈 소스를 살펴보게.
 
-You can follow the instructions there to add it to your project, and start using it with an example implementation just like we did in this lesson.
+그곳에 있는 설명대로 따라서 자네의 프로젝트에 추가하고, 하나의 예제로 구현을 시작할 수 있다네. 이 레슨에서 우리가 했던 것처럼 말이지.
 
-Got questions? Head on over to our <a href="https://t.me/loomnetworkdev" target=_blank>developer chat</a> on Telegram and someone will help you out.
+질문이 있는가? Telegram에 있는 우리의 <a href="https://t.me/loomnetworkdev" target=_blank>개발자 대화방</a>에서 질문하면 누군가 자네를 도와줄걸세.
 
-Otherwise, head on back to the <a href="/course">course page</a>, and choose your next CryptoZombies adventure!
+궁금한 것이 없다면, <a href="/course">코스 페이지</a>로 돌아가서 다음 크립토좀비 모험을 선택하게!
